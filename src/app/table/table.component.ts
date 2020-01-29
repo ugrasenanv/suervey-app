@@ -3,6 +3,8 @@ import {
   TemplateRef,
   ViewChildren
 } from '@angular/core';
+import {DataTableIcons, DataTableParams, DataTableTranslations, defaultIcons, defaultTranslations, RowCallback} from '../tools/types';
+import {ColumnDirective} from './column.directive';
 
 @Component({
   selector: 'app-table',

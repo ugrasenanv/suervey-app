@@ -1,5 +1,5 @@
 import {Component, forwardRef, Inject, OnInit} from '@angular/core';
-import {DataTableComponent} from '../table/table.component';
+// import {DataTableComponent} from '../table/table.component';
 import {PaginationButton} from './pagination-button';
 
 @Component({
