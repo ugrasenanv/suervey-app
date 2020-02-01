@@ -1,0 +1,6 @@
+<my-table
+[config]="(dataTable$ | async).config"
+[data]="dataTable$ | async"
+(newPage)="requestNewPage($event)"
+(selection)="getSelection($event)"
+></my-table>
