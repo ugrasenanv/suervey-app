@@ -19,7 +19,7 @@ import { TabComponent } from './tabs/tab.component';
 import { TodaysReviewComponent } from './todays-review/todays-review.component';
 import { AdminTableComponent } from './admin-table/admin-table.component';
 import { RowComponent } from './row/row.component';
-import { TableComponent } from './table/table.component';
+
 import { PaginationComponent } from './pagination/pagination.component';
 import { TableColumnDirective } from './table-column.directive';
 
@@ -43,7 +43,7 @@ import { TableColumnDirective } from './table-column.directive';
         TodaysReviewComponent,
         AdminTableComponent,
         RowComponent,
-        TableComponent,
+       
         PaginationComponent,
         TableColumnDirective
     ],
