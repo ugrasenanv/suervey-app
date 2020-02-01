@@ -1,21 +1,53 @@
 import {
-  Component, ContentChild, ContentChildren, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, QueryList, SimpleChanges,
-  TemplateRef,
-  ViewChildren
+  Component,
+  Input,
+  ChangeDetectionStrategy,
+  ViewEncapsulation,
+  Output,
+  EventEmitter
 } from '@angular/core';
-import {DataTableIcons, DataTableParams, DataTableTranslations, defaultIcons, defaultTranslations, RowCallback} from '../tools/types';
-import {ColumnDirective} from './column.directive';
+
+import { Config } from './config';
+import { DataTable } from './data';
+import { PageRequest } from './pageRequest';
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css']
+  selector: 'my-table',
+  templateUrl: 'table.component.html',
+  styleUrls: ['table.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None
 })
-export class TableComponent implements OnInit {
+export class MyTableComponent {
 
-  constructor() { }
+  @Input()
+  public config: Config;
 
-  ngOnInit() {
+  @Input()
+  public data: DataTable<any>;
+
+  public size = 5;
+  public pageNumber = 0;
+
+  @Output()
+  public newPage: EventEmitter<PageRequest> = new EventEmitter<PageRequest>();
+
+  @Output()
+  public selection: EventEmitter<number> = new EventEmitter<number>();
+
+  public changePage(pageNum: number) {
+    const num = (pageNum < 0) ? 0 :
+      (pageNum >= this.data.lastPage) ? (this.data.lastPage - 1) : pageNum;
+
+    this.pageNumber = num;
+
+    this.newPage.emit({
+      page: num,
+      size: Number(this.size)
+    });
   }
 
+  public onSelect (index: number) {
+    this.selection.emit(index + (this.pageNumber * this.size));
+  }
 }
