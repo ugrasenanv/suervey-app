@@ -1,3 +1,12 @@
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { NgReduxModule } from '@angular-redux/store';
+import { NgRedux, DevToolsExtension } from '@angular-redux/store';
+import { rootReducer, IAppState } from './store/index';
+import { UsersActions } from './actions/users.actions'
+
+// =========================>
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -134,7 +143,8 @@ export class DemoMaterialModule {}
     MatTableModule,
     MatTabsModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+    NgReduxModule, BrowserModule, FormsModule, HttpModule
     ],
     declarations: [
         AppComponent,
@@ -157,9 +167,22 @@ export class DemoMaterialModule {}
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
         // provider used to create fake backend
-        fakeBackendProvider
+        fakeBackendProvider, UsersActions
     ],
     bootstrap: [AppComponent]
 })
 
-export class AppModule { }
+export class AppModule { constructor(
+    private ngRedux: NgRedux<IAppState>,
+    private devTool: DevToolsExtension
+  ) {
+
+    this.ngRedux.configureStore(
+      rootReducer,
+      {} as IAppState,
+      [],
+      [ devTool.isEnabled() ? devTool.enhancer() : f => f]
+    );
+
+  }
+}
