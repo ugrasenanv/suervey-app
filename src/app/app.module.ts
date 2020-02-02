@@ -67,8 +67,6 @@ import {
 } from '@angular/material';
 
 import {CdkTableModule} from '@angular/cdk/table';
-import { SurveyFormComponent } from './survey-form/survey-form.component';
-
 @NgModule({
   exports: [
     CdkTableModule,
