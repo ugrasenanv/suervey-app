@@ -157,8 +157,7 @@ export class DemoMaterialModule {}
         RowComponent,
         TableComponent,
         PaginationComponent,
-        TableColumnDirective,
-        SurveyFormComponent
+        TableColumnDirective
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
