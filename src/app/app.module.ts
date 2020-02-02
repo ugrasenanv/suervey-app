@@ -58,6 +58,7 @@ import {
 } from '@angular/material';
 
 import {CdkTableModule} from '@angular/cdk/table';
+import { SurveyFormComponent } from './survey-form/survey-form.component';
 
 @NgModule({
   exports: [
@@ -148,7 +149,8 @@ export class DemoMaterialModule {}
         RowComponent,
         TableComponent,
         PaginationComponent,
-        TableColumnDirective
+        TableColumnDirective,
+        SurveyFormComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
