@@ -4,21 +4,15 @@ import { NgReduxModule } from '@angular-redux/store';
 import { NgRedux, DevToolsExtension } from '@angular-redux/store';
 import { rootReducer, IAppState } from './store/index';
 import { UsersActions } from './actions/users.actions'
-
-// =========================>
-
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
-// used to create fake backend
 import { fakeBackendProvider } from './_helpers';
-
 import { AppComponent } from './app.component';
 import { appRoutingModule } from './app.routing';
-
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+
 import { HomeComponent } from './home';
 import { AdminComponent } from './admin';
 import { LoginComponent } from './login';
