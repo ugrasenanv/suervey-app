@@ -6,30 +6,31 @@ import { UsersActions } from '../actions/users.actions';
 
 @Component({
   selector: 'app-survey-form',
-  template: `
-    <div>
+  templateUrl: './survey-form.component.html',
+  // template: `
+    // <div>
 
-    <hr>
-     TOTAL USER: {{ (users$ | async).length }}
+    // <hr>
+    //  TOTAL USER: {{ (users$ | async).length }}
 
-     <input type=text 
-       placeholder="add user"
-       #newUser
-       (keyup.enter)="addUser(newUser)" />
+    //  <input type=text 
+    //    placeholder="add user"
+    //    #newUser
+    //    (keyup.enter)="addUser(newUser)" />
 
-     <hr />
-     <li class="list-group-item"
-         *ngFor="let item of (users$ | async)">
+    //  <hr />
+    //  <li class="list-group-item"
+    //      *ngFor="let item of (users$ | async)">
         
-        {{item.name}}
+    //     {{item.name}}
         
-        <button class="btn btn-danger btn-xs pull-right" 
-          (click)="actions.delete( item.id )">
-          delete
-        </button>
-      </li>
+    //     <button class="btn btn-danger btn-xs pull-right" 
+    //       (click)="actions.delete( item.id )">
+    //       delete
+    //     </button>
+    //   </li>
 
-    </div>  `,
+    // </div>  `,
 })
 export class SurveyFormComponent  { 
   @select('users') public users$: Observable<User>;
