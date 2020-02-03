@@ -1,15 +1,46 @@
 <div class="card mt-4">
-    <h4 class="card-header">Your Survey</h4>
-    <div class="card-body">
-      <div id="survey">
-          TOTAL USER: {{ (users$ | async).length }}
-     <input type=text 
+	<h4 class="card-header">Your Survey</h4>
+	<div class="card-body">
+		<div id="survey">
+			TOTAL USER: {{ (users$ | async).length }} =====>
+      	TOTAL surveys: {{ (surveys$ | async).length }}
+			<input type=text
        placeholder="add user"
        #newUser
        (keyup.enter)="addUser(newUser)" />
 
-     <hr />
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+			<hr />
+
+			<form [formGroup]="registerForm" (ngSubmit)="addUser()">
+				<div id="name-field" class="field form-group">
+					<label id="name-label" for="name" class="labels">First Name:</label>
+					<!-- <input id="name" class="inputs form-group" placeholder="Enter your name" type="text" required name="firstName" [formControl]="surveyForm.get('firstName')" (onBlur)="f.ngSubmit.emit()"/> -->
+					<input type="text" formControlName="firstName" class="inputs form-group"  [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+					<div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+						<div *ngIf="f.firstName.errors.required">First Name is required</div>
+					</div>
+				</div>
+        <div class="text-center">
+                <button class="btn btn-primary mr-1">Add Survery</button>
+                <button class="btn btn-secondary" type="reset" (click)="onReset()">Reset</button>
+            </div>
+			</form>
+			<!-- <div class="form-group col-5">
+                    <label>First Name</label>
+                    <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                    <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                        <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-5">
+                    <label>Last Name</label>
+                    <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                    <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                        <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                    </div>
+                </div> -->
+
+			<!-- <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
             <div class="form-row">
                 <div class="form-group col">
                     <label>Title</label>
@@ -74,12 +105,12 @@
                 <button class="btn btn-primary mr-1">Register</button>
                 <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
             </div>
-        </form>
+        </form> -->
 
-	<pre>{{ registerForm.value | json }}</pre>
-	<div>isValid: {{ registerForm.valid }}</div>
-    <!--  -->
-<!-- <div class="p-4">
+			<pre>{{ registerForm.value | json }}</pre>
+			<div>isValid: {{ registerForm.valid }}</div>
+			<!--  -->
+			<!-- <div class="p-4">
 
 	<form #f="ngForm" [formGroup]="myForm" (keydown)="f.ngSubmit.emit()">
 		<div class="form-group">
@@ -101,8 +132,8 @@
 
 </div> -->
 
-    <!--  -->
-     	<!-- <form #f="ngForm" id="survey-form" [formGroup]="surveyForm1" (keydown)="f.ngSubmit.emit()">
+			<!--  -->
+			<!-- <form #f="ngForm" id="survey-form" [formGroup]="surveyForm1" (keydown)="f.ngSubmit.emit()">
   		<div id="name-field" class="field form-group" >
 			<label id="name-label" for="name" class="labels">First Name:</label>
 			<input id="name" class="inputs form-group" placeholder="Enter your name" type="text" required name="firstName" [formControl]="surveyForm.get('firstName')" (onBlur)="f.ngSubmit.emit()"/>
@@ -170,9 +201,9 @@
 						<button id="submit" type="submit">Submit</button>
 					</div>
 	</form> -->
-</div>
-</div>
+		</div>
+	</div>
 </div>
 
-	<pre>{{ myForm.value | json }}</pre>
-	<div>isValid: {{ myForm.valid }}</div>
+<pre>{{ myForm.value | json }}</pre>
+<div>isValid: {{ myForm.valid }}</div>
