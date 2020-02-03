@@ -43,7 +43,7 @@ export class SurveyComponent implements OnInit {
   surveyForm: FormGroup;
 
   addUser(labelInput: HTMLInputElement) {
-    console.log('labelInput=====>',labelInput);
+    console.log('labelInput=====>',labelInput.value);
       this.actions.add(labelInput.value);
       labelInput.value = '';
   }
