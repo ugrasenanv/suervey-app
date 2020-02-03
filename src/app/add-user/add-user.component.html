@@ -1,0 +1,178 @@
+<div class="card mt-4">
+    <h4 class="card-header">Your Survey</h4>
+    <div class="card-body">
+      <div id="survey">
+          TOTAL USER: {{ (users$ | async).length }}
+     <input type=text 
+       placeholder="add user"
+       #newUser
+       (keyup.enter)="addUser(newUser)" />
+
+     <hr />
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Title</label>
+                    <select formControlName="title" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+                        <option value=""></option>
+                        <option value="Mr">Mr</option>
+                        <option value="Mrs">Mrs</option>
+                        <option value="Miss">Miss</option>
+                        <option value="Ms">Ms</option>
+                    </select>
+                    <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                        <div *ngIf="f.title.errors.required">Title is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-5">
+                    <label>First Name</label>
+                    <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                    <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                        <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                    </div>
+                </div>
+                <div class="form-group col-5">
+                    <label>Last Name</label>
+                    <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                    <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                        <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.required">Email is required</div>
+                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Password</label>
+                    <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">Password is required</div>
+                        <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                    </div>
+                </div>
+                <div class="form-group col">
+                    <label>Confirm Password</label>
+                    <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+                    <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                        <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+                        <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.acceptTerms.errors }" />
+                <label for="acceptTerms" class="form-check-label">Accept Terms & Conditions</label>
+                <div *ngIf="submitted && f.acceptTerms.errors" class="invalid-feedback">Accept Ts & Cs is required</div>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-primary mr-1">Register</button>
+                <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+            </div>
+        </form>
+
+	<pre>{{ registerForm.value | json }}</pre>
+	<div>isValid: {{ registerForm.valid }}</div>
+    <!--  -->
+<!-- <div class="p-4">
+
+	<form #f="ngForm" [formGroup]="myForm" (keydown)="f.ngSubmit.emit()">
+		<div class="form-group">
+			<label>Vorname:</label>
+			<input class="form-control" type="text" name="firstName" [formControl]="myForm.get('firstName')" (onBlur)="f.ngSubmit.emit()"
+			/>
+		</div>
+
+		<div class="form-group">
+			<label>Nachname:</label>
+			<input class="form-control" type="text" name="lastName" [formControl]="myForm.get('lastName')" (onChange)="f.ngSubmit.emit()"
+			 (onBlur)="f.ngSubmit.emit()" />
+		</div>
+	</form>
+
+
+	<pre>{{ myForm.value | json }}</pre>
+	<div>isValid: {{ myForm.valid }}</div>
+
+</div> -->
+
+    <!--  -->
+     	<!-- <form #f="ngForm" id="survey-form" [formGroup]="surveyForm1" (keydown)="f.ngSubmit.emit()">
+  		<div id="name-field" class="field form-group" >
+			<label id="name-label" for="name" class="labels">First Name:</label>
+			<input id="name" class="inputs form-group" placeholder="Enter your name" type="text" required name="firstName" [formControl]="surveyForm.get('firstName')" (onBlur)="f.ngSubmit.emit()"/>
+     
+    </div>
+			<div id="email-field" class="field">
+				<label id="email-label" for="email" class="labels">Email:</label>
+				<input id="email" class="inputs" placeholder="Enter your email" type="email" required/>
+    </div>
+				<div id="number-field" class="field">
+					<label id="number-label" for="number" class="labels">Number:</label>
+					<input id="number" class="inputs" placeholder="Enter your phone number" type="number" min="1000000" max="100000000000000"  required/>
+    </div>
+					<div id="dropdown-field" class="field">
+						<label id="dropdown-label" class="labels">Ear preference:</label>
+						<select id="dropdown" class="inputs">
+        <option disabled selected>Select an option</option>
+        <option>Lop</option>
+        <option>Upright</option>
+        <option>No preference</option>
+      </select>
+					</div>
+					<div id="radio-field" class="field">
+						<label id="radio-label" class="labels">Preferred gender:</label>
+						<div id="left-side-radio-field" class="inputs">
+							<label class="radio-button-label">
+          <input type="radio" name="gender">Male
+        </label>
+							<label class="radio-button-label">
+          <input type="radio" name="gender">Female
+        </label>
+						</div>
+					</div>
+					<div id="checkbox-field" class="field">
+						<label id="checkbox-label" class="labels">Preferred sizes:</label>
+						<div id="left-side-checkbox-field" class="inputs">
+							<label class="checkbox-button-label">
+          <input type="checkbox" name="size">Baby
+        </label>
+							<label class="checkbox-button-label">
+          <input type="checkbox" name="size">Dwarf
+        </label>
+							<label class="radio-button-label">
+          <input type="checkbox" name="size">Medium
+        </label>
+							<label class="checkbox-button-label">
+          <input type="checkbox" name="size">Large
+        </label>
+							<label class="checkbox-button-label">
+          <input type="checkbox" name="size">Giant
+        </label>
+						</div>
+					</div>
+					<div id="textarea-field" class="field">
+						<label class="labels">Do you have any more preferences?</label>
+						<textarea id="textarea" placeholder="Enter your comment here..." >
+              </textarea>
+					</div>
+          <div id="checkbox-field" class="field">
+            	<label class="labels">Your Rating</label>
+              <app-rating-star></app-rating-star>
+
+          </div>
+					<div id="submit-field" class="field">
+						<button id="submit" type="submit">Submit</button>
+					</div>
+	</form> -->
+</div>
+</div>
+</div>
+
+	<pre>{{ myForm.value | json }}</pre>
+	<div>isValid: {{ myForm.valid }}</div>

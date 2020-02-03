@@ -60,6 +60,7 @@ import {
 } from '@angular/material';
 
 import {CdkTableModule} from '@angular/cdk/table';
+import { AddUserComponent } from './add-user/add-user.component';
 @NgModule({
   exports: [
     CdkTableModule,
@@ -150,7 +151,8 @@ export class DemoMaterialModule {}
         RowComponent,
         TableComponent,
         PaginationComponent,
-        TableColumnDirective
+        TableColumnDirective,
+        AddUserComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

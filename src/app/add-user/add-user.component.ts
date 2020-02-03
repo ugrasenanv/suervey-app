@@ -12,11 +12,12 @@ import { MustMatch } from '../_helpers/must-match.validator';
 // @Component({ templateUrl: 'admin.component.html' })
 
 @Component({
-  templateUrl: './survey.component.html',
-  styleUrls: ['./survey.component.css']
+  selector: 'app-add-user',
+  templateUrl: './add-user.component.html',
+  styleUrls: ['./add-user.component.css']
 })
 
-export class SurveyComponent implements OnInit {
+export class AddUserComponent implements OnInit {
   registerForm: FormGroup;
     submitted = false;
    

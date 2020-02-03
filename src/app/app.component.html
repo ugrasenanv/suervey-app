@@ -4,6 +4,7 @@
         <a class="nav-item nav-link" routerLink="/">Home</a>
         <a class="nav-item nav-link" routerLink="/user" *ngIf="isUser">User</a>
         <a class="nav-item nav-link" routerLink="/admin" *ngIf="isAdmin">Admin</a>
+        <a class="nav-item nav-link" routerLink="/adduser" *ngIf="isAdmin">Add User</a>
         <a class="nav-item nav-link" (click)="logout()">Logout</a>
     </div>
 </nav>
