@@ -3,7 +3,7 @@
 	<div class="card-body">
 		<div id="survey">
 			TOTAL USER: {{ (users$ | async).length }} =====>
-      	TOTAL surveys: {{ (surveys$ | async) }}
+			<!-- TOTAL surveys: {{ (surveys$ | async) }} -->
 			<input type=text
        placeholder="add user"
        #newUser
@@ -20,10 +20,62 @@
 						<div *ngIf="f.firstName.errors.required">First Name is required</div>
 					</div>
 				</div>
-        <div class="text-center">
-                <button class="btn btn-primary mr-1">Add Survery</button>
-                <button class="btn btn-secondary" type="reset" (click)="onReset()">Reset</button>
-            </div>
+
+				<div id="name-field" class="field form-group">
+					<label id="name-label" for="lastName" class="labels">Last Name:</label>
+					<input type="text" formControlName="lastName" class="inputs form-group"  [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+					<div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+						<div *ngIf="f.lastName.errors.required">Last Name is required</div>
+					</div>
+				</div>
+
+				<div id="name-field" class="field form-group">
+					<label id="name-label" for="email" class="labels">E-Mail:</label>
+					<input type="text" formControlName="email" class="inputs form-group"  [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+					<div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+						<div *ngIf="f.email.errors.required">E-Mail is required</div>
+					</div>
+				</div>
+
+				<div id="name-field" class="field form-group">
+					<label id="name-label" for="gender" class="labels">Gender:</label>
+					<input type="text" formControlName="gender" class="inputs form-group"  [ngClass]="{ 'is-invalid': submitted && f.gender.errors }" />
+					<div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+						<div *ngIf="f.password.gender.required">Gender is required</div>
+					</div>
+				</div>
+
+				<div id="name-field" class="field form-group">
+					<label id="name-label" for="phoneNumber" class="labels">Phone Number:</label>
+					<input type="text" formControlName="phoneNumber" class="inputs form-group"  [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }" />
+					<div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
+						<div *ngIf="f.password.phoneNumber.required">Phone Number is required</div>
+					</div>
+				</div>
+
+
+
+
+				<div id="name-field" class="field form-group">
+					<label id="name-label" for="preferences" class="labels">Please write your comments:</label>
+					<textarea  formControlName="preferences" class="inputs form-group"  [ngClass]="{ 'is-invalid': submitted && f.preferences.errors }"  placeholder="Enter your comment here..."> </textarea>
+					<div *ngIf="submitted && f.preferences.errors" class="invalid-feedback">
+						<div *ngIf="f.password.preferences.required">comments is required</div>
+					</div>
+				</div>
+        
+				<div id="name-field" class="field form-group">
+					<label id="name-label" for="email" class="labels">Rati:</label>
+					<input type="text" formControlName="email" class="inputs form-group"  [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+					<div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+						<div *ngIf="f.email.errors.required">E-Mail is required</div>
+					</div>
+				</div>
+
+				<div class="text-center">
+					<button class="btn btn-primary mr-1">Add Survery</button>
+					<button class="btn btn-secondary" type="reset" (click)="onReset()">Reset</button>
+				</div>
 			</form>
 			<!-- <div class="form-group col-5">
                     <label>First Name</label>
