@@ -4,7 +4,7 @@ export interface Survey {
   lastName?: string;
   email?: string;
   gender?: string;
-  phoneNumber?: number;
+  phoneNumber?: string;
   preferences?: string;
   rating?: number;
   date?: string;

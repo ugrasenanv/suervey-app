@@ -61,6 +61,7 @@ import {
 
 import {CdkTableModule} from '@angular/cdk/table';
 import { AddUserComponent } from './add-user/add-user.component';
+import { RatingStarComponent } from './rating-star/rating-star.component';
 @NgModule({
   exports: [
     CdkTableModule,
@@ -152,7 +153,8 @@ export class DemoMaterialModule {}
         TableComponent,
         PaginationComponent,
         TableColumnDirective,
-        AddUserComponent
+        AddUserComponent,
+        RatingStarComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

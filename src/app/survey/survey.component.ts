@@ -1,51 +1,46 @@
-import { select } from '@angular-redux/store';
-import { Observable } from 'rxjs';
-import { User } from '../model/user';
-import { UsersActions } from '../actions/users.actions';
+import { select } from "@angular-redux/store";
+import { Observable } from "rxjs";
+import { User } from "../model/user";
+import { UsersActions } from "../actions/users.actions";
 
-import { Survey } from '../model/survey';
-import { SurveyActions } from '../actions/survey.actions';
+import { Survey } from "../model/survey";
+import { SurveyActions } from "../actions/survey.actions";
 
-import { Component, OnInit } from '@angular/core';
-import { first } from 'rxjs/operators';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MustMatch } from '../_helpers/must-match.validator';
+import { Component, OnInit } from "@angular/core";
+import { first } from "rxjs/operators";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MustMatch } from "../_helpers/must-match.validator";
 
 // import { User } from '../_models';
 // import { UserService } from '../_services';
 // @Component({ templateUrl: 'admin.component.html' })
 
 @Component({
-  templateUrl: './survey.component.html',
-  styleUrls: ['./survey.component.css']
+  templateUrl: "./survey.component.html",
+  styleUrls: ["./survey.component.css"]
 })
-
 export class SurveyComponent implements OnInit {
   registerForm: FormGroup;
-    submitted = false;
-    loading = false;
-    users: User[] = [];
-    surveys: Survey[] = [];
-    @select('users') public users$: Observable<User>;
-    @select('surveys') public surveys$: Observable<Survey>;
+  submitted = false;
+  rating = 0;
 
-
-//  constructor(private formBuilder: FormBuilder, private fb: FormBuilder, public actions:  UsersActions) { }
+  loading = false;
+  users: User[] = [];
+  surveys: Survey[] = [];
+  @select("users") public users$: Observable<User>;
+  @select("surveys") public surveys$: Observable<Survey>;  
 
   // constructor(public actions:  UsersActions) {} public actions:  UsersActions,
-    constructor(private formBuilder: FormBuilder, public actions:  UsersActions,) {
-    // this.surveyForm = this.fb.group({
-    //   firstName: this.fb.control('', Validators.required),
-    //   lastName: this.fb.control('', Validators.required)
-    // });
+  constructor(private formBuilder: FormBuilder, public actions: UsersActions) {
   }
+  
 
   surveyForm: FormGroup;
 
-  addUser(labelInput: HTMLInputElement) {
-    console.log('labelInput=====>',labelInput.value);
-      this.actions.add(labelInput.value);
-      labelInput.value = '';
+  addUser(parms) {
+    console.log('params====>',parms);
+      //  this.actions.add(labelInput);
+    // labelInput.value = "";
   }
 
   // addSurvey(labelInput: HTMLInputElement) {
@@ -53,43 +48,41 @@ export class SurveyComponent implements OnInit {
   //     labelInput.value = '';
   // }
 
-    // constructor(private userService: UserService) { }
+  // constructor(private userService: UserService) { }
 
-    ngOnInit() {
-         this.registerForm = this.formBuilder.group({
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
-            email: ['', [Validators.required, Validators.email]],
-            gender: ['', Validators.required],
-            phoneNumber: ['', Validators.required],
-            preferences: ['', Validators.required],
-            acceptTerms: [false, Validators.requiredTrue]
-        }, {
-            validator: MustMatch('password', 'confirmPassword')
-        });
+  ngOnInit() {
+    this.registerForm = this.formBuilder.group(
+      {
+        firstName: ["", Validators.required],
+        lastName: ["", Validators.required],
+        email: ["", [Validators.required, Validators.email]],
+        gender: ["", Validators.required],
+        phoneNumber: ["", [Validators.required, Validators.minLength(10)]],
+        comments: ["", Validators.required],
+        
+        acceptTerms: [false, Validators.requiredTrue]
+      }
+    );
+  }
+  get f() {
+    return this.registerForm.controls;
+  }
 
+  onSubmit() {
+    this.submitted = true;
+    this.registerForm.value.rating = this.rating;
+    console.log(this.rating);
+    if (this.registerForm.invalid) {
+      return;
     }
 
-    // convenience getter for easy access to form fields
-    get f() { return this.registerForm.controls; }
-
- onSubmit() {
-        this.submitted = true;
-
-        // stop here if form is invalid
-        if (this.registerForm.invalid) {
-            return;
-        }
-
-        // display form values on success
-        alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registerForm.value, null, 4));
-    }
-    onReset() {
-        this.submitted = false;
-        this.registerForm.reset();
-    }
-
-
-
-
+    thisaddUser(this.registerForm.value);
+    // alert(
+    //   "SUCCESS!! :-)\n\n" + JSON.stringify(this.registerForm.value, null, 4)
+    // );
+  }
+  onReset() {
+    this.submitted = false;
+    this.registerForm.reset();
+  }
 }

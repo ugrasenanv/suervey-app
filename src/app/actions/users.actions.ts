@@ -12,13 +12,14 @@ export class UsersActions {
     private ngRedux: NgRedux<IAppState>,
   ) { }
 
-  add(name: string): void {
-    console.log(name)
+  add(obj: any): void {
+     console.log('obj=====>',obj);
+    // console.log(obj)
     this.ngRedux.dispatch({
       type: UsersActions.USER_ADD,
       payload: {
         id: new Date().valueOf(), // random id
-        name
+        obj
       }
     });
   }
