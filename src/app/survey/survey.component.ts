@@ -37,9 +37,8 @@ export class SurveyComponent implements OnInit {
 
   surveyForm: FormGroup;
 
-  addUser(parms) {
-    console.log('params====>',parms);
-      //  this.actions.add(labelInput);
+  addSurvey(parms) {
+       this.actions.add(parms);
     // labelInput.value = "";
   }
 
@@ -70,13 +69,15 @@ export class SurveyComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+   let date: Date = new Date("2019-01-16");  
     this.registerForm.value.rating = this.rating;
+     this.registerForm.value.date = date;
     console.log(this.rating);
     if (this.registerForm.invalid) {
       return;
     }
 
-    thisaddUser(this.registerForm.value);
+    this.addSurvey(this.registerForm.value);
     // alert(
     //   "SUCCESS!! :-)\n\n" + JSON.stringify(this.registerForm.value, null, 4)
     // );
