@@ -11,6 +11,8 @@ import { first } from "rxjs/operators";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MustMatch } from "../_helpers/must-match.validator";
 
+import { Router } from '@angular/router';
+
 // import { User } from '../_models';
 // import { UserService } from '../_services';
 // @Component({ templateUrl: 'admin.component.html' })
@@ -31,7 +33,10 @@ export class SurveyComponent implements OnInit {
   @select("surveys") public surveys$: Observable<Survey>;  
 
   // constructor(public actions:  UsersActions) {} public actions:  UsersActions,
-  constructor(private formBuilder: FormBuilder, public actions: UsersActions) {
+  constructor(
+      private router: Router,
+      private formBuilder: FormBuilder, 
+      public actions: UsersActions) {
   }
   
 
@@ -78,9 +83,11 @@ export class SurveyComponent implements OnInit {
     }
 
     this.addSurvey(this.registerForm.value);
-    // alert(
-    //   "SUCCESS!! :-)\n\n" + JSON.stringify(this.registerForm.value, null, 4)
-    // );
+   
+    alert(
+      "SUCCESS!! :-)\n\n" + JSON.stringify(this.registerForm.value, null, 4)
+    );
+      this.router.navigate(['/']);
   }
   onReset() {
     this.submitted = false;
