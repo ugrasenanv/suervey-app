@@ -13,8 +13,11 @@ import { Observable } from "rxjs";
 })
 export class TableComponent implements OnInit  {
   displayedColumns = ['id', 'name', 'progress', 'color'];
-  dataSource: MatTableDataSource<UserData>;
-users: User[] = [];
+  displayColumns = ['id', 'firstName', 'lastName', 'email', 'gender', 'phoneNumber','comments','rating', 'date'];
+
+   dataSource: MatTableDataSource<UserData>;
+   surveyDataSource : MatTableDataSource<User>;
+  users: User[] = [];
   @select("users") public users$: Observable<User>;
 
    @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -29,6 +32,7 @@ users: User[] = [];
 
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(users);
+    // this.surveyDataSource = new MatTableDataSource(users$);
   }
   ngOnInit() {}
 
@@ -40,12 +44,15 @@ users: User[] = [];
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+   this.surveyDataSource.paginator = this.paginator;
+   this.surveyDataSource.sort = this.sort;
   }
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
+     this.surveyDataSource.filter = filterValue;
   }
 }
 

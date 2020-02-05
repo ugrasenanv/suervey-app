@@ -5,7 +5,7 @@ export interface User {
   email?: string;
   gender?: string;
   phoneNumber?: string;
-  preferences?: string;
+  comments?: string;
   rating?: number;
   date?: string;
 }
