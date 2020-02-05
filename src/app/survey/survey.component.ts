@@ -2,20 +2,13 @@ import { select } from "@angular-redux/store";
 import { Observable } from "rxjs";
 import { User } from "../model/user";
 import { UsersActions } from "../actions/users.actions";
-
 import { Survey } from "../model/survey";
 import { SurveyActions } from "../actions/survey.actions";
-
 import { Component, OnInit } from "@angular/core";
 import { first } from "rxjs/operators";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MustMatch } from "../_helpers/must-match.validator";
-
 import { Router } from '@angular/router';
-
-// import { User } from '../_models';
-// import { UserService } from '../_services';
-// @Component({ templateUrl: 'admin.component.html' })
 
 @Component({
   templateUrl: "./survey.component.html",
@@ -25,35 +18,21 @@ export class SurveyComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
   rating = 0;
-
   loading = false;
   users: User[] = [];
-  surveys: Survey[] = [];
   @select("users") public users$: Observable<User>;
-  @select("surveys") public surveys$: Observable<Survey>;  
 
-  // constructor(public actions:  UsersActions) {} public actions:  UsersActions,
   constructor(
       private router: Router,
       private formBuilder: FormBuilder, 
       public actions: UsersActions) {
   }
-  
 
   surveyForm: FormGroup;
 
   addSurvey(parms) {
        this.actions.add(parms);
-    // labelInput.value = "";
   }
-
-  // addSurvey(labelInput: HTMLInputElement) {
-  //     this.actions.add(labelInput.value);
-  //     labelInput.value = '';
-  // }
-
-  // constructor(private userService: UserService) { }
-
   ngOnInit() {
     this.registerForm = this.formBuilder.group(
       {
@@ -63,7 +42,6 @@ export class SurveyComponent implements OnInit {
         gender: ["", Validators.required],
         phoneNumber: ["", [Validators.required, Validators.minLength(10)]],
         comments: ["", Validators.required],
-        
         acceptTerms: [false, Validators.requiredTrue]
       }
     );
@@ -83,7 +61,6 @@ export class SurveyComponent implements OnInit {
     }
 
     this.addSurvey(this.registerForm.value);
-   
     alert(
       "SUCCESS!! :-)\n\n" + JSON.stringify(this.registerForm.value, null, 4)
     );

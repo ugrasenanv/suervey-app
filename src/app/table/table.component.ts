@@ -1,6 +1,9 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, ViewChild, OnInit} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-
+import { User } from "../model/user";
+import { UsersActions } from "../actions/users.actions";
+import { select } from "@angular-redux/store";
+import { Observable } from "rxjs";
 
 
 @Component({
@@ -8,15 +11,18 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
-export class TableComponent  {
+export class TableComponent implements OnInit  {
   displayedColumns = ['id', 'name', 'progress', 'color'];
   dataSource: MatTableDataSource<UserData>;
-
+users: User[] = [];
+  @select("users") public users$: Observable<User>;
 
    @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
- constructor() {
+ constructor(
+   public actions: UsersActions
+   ){
     // Create 100 users
     const users: UserData[] = [];
     for (let i = 1; i <= 100; i++) { users.push(createNewUser(i)); }
@@ -24,6 +30,7 @@ export class TableComponent  {
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(users);
   }
+  ngOnInit() {}
 
 
   /**
