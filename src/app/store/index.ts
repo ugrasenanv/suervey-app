@@ -1,6 +1,17 @@
-export * from './actions';
-export * from './effects';
-export * from './entities';
-export * from './reducers';
-export * from './selectors';
-export * from './serializer';
+import { combineReducers } from "redux";
+import { UsersReducer } from "./users.reducer";
+import { User } from "../model/user";
+import { SurveyReducer } from "./survey.reducer";
+import { Survey } from "../model/survey";
+
+export class IAppState {
+  users: User[];
+  surveys: Survey[];
+  config;
+}
+
+export const rootReducer = combineReducers<IAppState>(
+  {
+    users: UsersReducer,
+    surveys: SurveyReducer
+});

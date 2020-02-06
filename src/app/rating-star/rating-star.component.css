@@ -1,0 +1,17 @@
+#star {
+  display: flex;
+}
+
+.star {
+  font-size: 2rem;
+  margin: 10px 0;
+  cursor: pointer;
+}
+a
+.star:not(.on) {
+  color: #ccc;
+}
+
+.star.on {
+  color: orange;
+}
