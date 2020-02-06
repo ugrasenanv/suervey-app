@@ -1,53 +1,73 @@
-<p>
-table works!
-</p>
-<!-- <div class="data-table-wrapper">
-  <div class="data-table-box">
-    <table class="table {{classTable}}">
-      <thead>
-      <tr>
-        <th [hide]="!isExpandable" class="expand-column-header" width="10px"></th>
-        <th [hide]="!indexColumnVisible" class="index-column-header">
-          <span [textContent]="indexColumnHeader"></span>
-        </th>
-        <th [hide]="!selectColumnVisible" class="select-column-header">
-          <div class="md-checkbox">
-            <input id="selectAllCheckboxHeader" [hide]="!multiSelect" type="checkbox" [(ngModel)]="selectAllCheckbox"/>
-            <label for="selectAllCheckboxHeader"></label>
-          </div>
-        </th>
-        <th *ngFor="let column of columns" #th [hide]="columnVisibility(column)"
-            [class.sortable]="column.sortable" [class.resizable]="column.resizable"
-            [ngClass]="column.styleClassObject" class="column-header" [style.width]="column.width | px">
-          <span (click)="headerClicked(column, $event)"  [ngClass]="{'column-header-show-icon':column.sortable}">
-            <span *ngIf="!column.headerTemplate" [textContent]="column.header"></span>
-            <span *ngIf="column.headerTemplate"
-                [ngTemplateOutlet]="column.headerTemplate"
-                [ngTemplateOutletContext]="{column: column}">
-            </span>
-            <span class="column-sort-icon" *ngIf="column.sortable">
-              <span class="{{icons.sort}} column-sortable-icon" [hide]="column.property === sortBy"></span>
-              <span [hide]="column.property !== sortBy">
-                <span class="{{icons.sortAsc}}" [hide]="sortAsc"></span>
-                <span class="{{icons.sortDesc}}" [hide]="!sortAsc"></span>
-              </span>
-            </span>
-          </span>
-          <span *ngIf="column.headerTemplateExtra"
-                [ngTemplateOutlet]="column.headerTemplateExtra"
-                [ngTemplateOutletContext]="{column: column}">
-          </span>
-          <span *ngIf="column.resizable" class="column-resize-handle"
-                (mousedown)="resizeColumnStart($event, column, th)"></span>
-        </th>
-      </tr>
-      </thead>
-      <tbody *ngFor="let item of items; let index=index" class="data-table-row-wrapper"
-             dataTableRow #row [item]="item" [index]="index" (selectedChange)="onRowSelectChanged(row)">
-      </tbody>
-    </table>
-    <div class="loading-cover" *ngIf="showReloading && reloading"></div>
-  </div>
+<div class="example-header">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>  
+       <!-- ===>  {{ (users$ | async) | json }} -->
+</div>
 
-  <data-table-pagination *ngIf="pagination"></data-table-pagination>
-</div> -->
+
+<div class="example-container mat-elevation-z8">
+ <mat-table [dataSource]="dataSource" matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+    </ng-container>
+
+    <!-- firstName Column -->
+    <ng-container matColumnDef="firstName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> firstName </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.firstName}} </mat-cell>
+    </ng-container>
+
+    <!-- lastName Column -->
+    <ng-container matColumnDef="lastName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> lastName </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.lastName}} </mat-cell>
+    </ng-container>
+
+    <!-- email Column -->
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> email </mat-header-cell>
+      <mat-cell *matCellDef="let row" > {{row.email}} </mat-cell>
+    </ng-container>
+
+    <!-- gender Column -->
+    <ng-container matColumnDef="gender">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> gender </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.gender}} </mat-cell>
+    </ng-container>
+
+    <!-- phoneNumber Column -->
+    <ng-container matColumnDef="phoneNumber">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> phoneNumber </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.phoneNumber}} </mat-cell>
+    </ng-container>
+
+    <!-- comments Column -->
+    <ng-container matColumnDef="comments">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> comments </mat-header-cell>
+      <mat-cell *matCellDef="let row" > {{row.comments}} </mat-cell>
+    </ng-container>
+
+    <!-- rating Column -->
+    <ng-container matColumnDef="rating">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> rating </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.rating}} </mat-cell>
+    </ng-container>
+
+    <!-- date Column -->
+    <ng-container matColumnDef="date">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> date </mat-header-cell>
+      <mat-cell *matCellDef="let row" > {{row.date}} </mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayColumns;">
+    </mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

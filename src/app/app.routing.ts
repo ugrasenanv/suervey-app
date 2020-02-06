@@ -6,6 +6,7 @@ import { LoginComponent } from './login';
 import { AuthGuard } from './_helpers';
 import { Role } from './_models';
 import { SurveyComponent } from './survey';
+import { AddUserComponent } from './add-user/add-user.component';
 const routes: Routes = [
     {
         path: '',
@@ -30,6 +31,14 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: { roles: [Role.Admin] }
     },
+    
+     {
+        path: 'adduser',
+        component: AddUserComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin] }
+    },
+    
     {
         path: 'login',
         component: LoginComponent
